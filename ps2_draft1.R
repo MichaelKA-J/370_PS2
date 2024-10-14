@@ -258,13 +258,9 @@ for(rep in 1:Nrep) {
 }
 
 #Checking my work
-first_50_reg_1 = reg_1_mat[1:50, ]
-first_50_reg_2 = reg_2_mat[1:50, ]
-first_50_reg_3 = reg_3_mat[1:50, ] 
-
-first_50_reg_1
-first_50_reg_2
-first_50_reg_3
+head(reg_1_mat)
+head(reg_2_mat)
+head(reg_3_mat)
 
 #-------------------------------------------------------------------------------
 # Auction Simulation
