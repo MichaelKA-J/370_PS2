@@ -189,6 +189,44 @@ sd_cols = apply(my_mat, 2, sd)
 #-------------------------------------------------------------------------------
 
 #1
+#What is the data generating process?
+'
+My process to simulate the population data is as follows:
+
+Define the population size N (10,000).
+
+Create a population of size N with roughly half male, half female.
+This is done using the sample function, sampling 10000 times from a 
+vector with two genders with 50/50 probability.
+
+Assign jobs (high-pay/low-pay) to each member of the population,
+with males having a 50% chance of high-pay jobs, 
+and females having a 25% of high-pay jobs.
+Using ifelse with two sample functions is used to randomly assign jobs with 
+appropriate probabilities for each gender.
+
+Assign wages to individuals based on their jobs-
+individuals with low-pay jobs have a wage of $10
+and individuals with high-pay jobs have a wage of $15.
+Ifelse is used to assign the correct wage based on job type.
+
+Combine the simulated gender, jobs, and wages into a dataframe
+so that there are 10,000 rows, 1 for each individual,
+and three columns for gender, job, and wages.
+'
+
+#What are the data?
+'
+We are trying to simulate a dataset of information on 
+the gender, job, and wage of 10,000 random individuals.
+The simulated data are stored in a dataframe with the following variables:
+Gender is a categorical variable, either male or female.
+Job is also a categoriacl variable, either high-paying or low-paying.
+Wage is a numeric variable, that can either be 10 or 15.
+What this will look like is 10,000 observations, 
+with each row representing one individual,
+and columns for gender, job, and wage respectively.
+'
 
 #Define Parameters
 Nrep = 10000
@@ -262,6 +300,50 @@ head(reg_1_mat)
 head(reg_2_mat)
 head(reg_3_mat)
 
+#3
+
+#Look at the mean of the coefficients in each regression across models
+#average intercept for regressions of wage on gender
+mean(reg_1_mat[, 1])
+#average gender coefficient for regressions of wage on gender
+mean(reg_1_mat[, 2])
+
+#average intercept for regressions of wage on job
+mean(reg_2_mat[, 1])
+#average gender coefficient for regressions of wage on job
+mean(reg_2_mat[, 2])
+
+#average intercept for regressions of wage on gender and job
+mean(reg_3_mat[, 1])
+#average gender coefficient for regressions of wage on gender and job
+mean(reg_3_mat[, 2])
+#average job coefficient for regressions of wage on gender and job
+mean(reg_3_mat[, 3])
+
+#Comparing the mean of the sex coefficients in the two models that control for sex
+mean_gender_coef_model_1 = mean(reg_1_mat[, 2])
+mean_gender_coef_model_3 = mean(reg_3_mat[, 2])
+mean_gender_coef_model_1
+mean_gender_coef_model_3
+
+#What does this tell us about controlling for occupation in this model?
+'
+The mean of the gender coefficient across reps is about 1.25
+but the mean of the gender coefficient across reps is close to 0
+when we control for high/low paying occupation.
+This suggests that differences in wages observed between men and women
+are mostly due to the fact that men and women hold different paying jobs
+'
+
+#What kind of bias does adding controls for occupation give rise to?
+'
+Adding controls for occupations reveals that there was in fact,
+omitted variables bias in the initial regression of wage on gender.
+This is ommitted variables bias 
+because we left out an important factor (whether a job is high paying)
+that is correlated with both 
+the outcome (wages) and the explanatory variable (gender)
+'  
 #-------------------------------------------------------------------------------
 # Auction Simulation
 #-------------------------------------------------------------------------------
