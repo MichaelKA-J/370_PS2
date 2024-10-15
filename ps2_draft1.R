@@ -226,6 +226,15 @@ Wage is a numeric variable, that can either be 10 or 15.
 What this will look like is 10,000 observations, 
 with each row representing one individual,
 and columns for gender, job, and wage respectively.
+
+Additionally, we will simulate this dataset 10,000 times, 
+and for each rep, we will run three linear regressions:
+1. wage on gender
+2. wage on job
+3. wage on both job and gender.
+For each rep, we will store the estimated coefficients as in matrices.
+Finally, we will find the average gender coefficient from the regressions
+of wage on gender and the regressions of wage on both job and gender.
 '
 
 #Define Parameters
